@@ -76,6 +76,16 @@ class MyMidas{
             return true;
         }
     }
+    
+    function sair(){
+        if($_SESSION['logado']){
+            session_destroy();
+            header('Location: ../sistema/login.php');
+        }else{
+            session_destroy();
+            header('Location: ../sistema/login.php');
+        }
+    }
 
 }
     

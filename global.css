@@ -13,6 +13,9 @@
     --primary-color-light:#f6f5ff;
     --toggle-color:#ddd;
     --text-color:#707070;
+    --text-button-color: #fff;
+    --button-color-primary-new: #4836BF;
+    --button-color-secondary-new: #2994F2;
 
     --tran-02: all 0.2 ease;
     --tran-03: all 0.3 ease;
@@ -36,6 +39,7 @@ body.dark{
     --primary-color-light:#3a3b3c;
     --toggle-color:#fff;
     --text-color:#ccc;
+    --text-button-color: #000;
 }
 
 /* ======= sidebar === */
@@ -132,7 +136,7 @@ body.dark{
 .sidebar .header-side .toggle{
     position: absolute;
     top: 50%;
-    right: -15%;
+    right: -6%;
     transform: translateY(-50%) rotate(180deg);
     height: 25px;
     width: 25px;
@@ -148,6 +152,7 @@ body.dark{
 
 .sidebar.close .header-side .toggle{
     transform: translateY(-50%);
+    right: -20%;
 }
 
 /* body.dark.close .sidebar .header-side .toggle{
@@ -227,7 +232,7 @@ body.dark .menu-bar .mode i.moon{
 
 
 .menu-bar .mode .toggle-switch{
-    right: 0;
+    right: 0%;
     position: absolute;
     display: flex;
     height: 100%;
@@ -269,11 +274,14 @@ body.dark .switch::before{
 
 .home{
     position:relative;
-    left: 250px;
+    left: 280px;
+    top: 30px;
     height: 100vh;
-    width: calc(100% - 250px);
+    width: calc(100% - 300px);
     background: var(--body-color);
     transition: var(--tran-05);
+    justify-content: center;
+    align-items: center;
 }
 .home .text{
     font-size: 30px;
@@ -283,8 +291,9 @@ body.dark .switch::before{
 }
 
 .sidebar.close ~ .home{
-    width: calc(100% - 436px) !important;
-    left: 88px;
+    width: calc(100% - 138px) !important;
+    left: 118px;
+    right:0px;
 
 }
 
@@ -297,3 +306,27 @@ body.dark .switch::before{
     padding-left: 0px;
 }
 
+.subtitulo{
+    margin-left: 40px !important;
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+.form-control{
+    color: var(--text-color) !important;
+}
+.form-label{
+    color: var(--text-color) !important;
+}
+.form-select{
+    color: var(--text-color) !important;
+}
+
+.btn-new-primary{
+    color: var(--text-button-color) !important;
+    width: 100%;
+}
+
+/* .card{
+    background:var(--sidebar-color);
+} */

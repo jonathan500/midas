@@ -17,6 +17,8 @@ if(mysqli_num_rows($exec_usuario) == 1){
     $_SESSION['erro'] = '';
     $re_exec_usuario = mysqli_fetch_assoc($exec_usuario);
     $_SESSION['usuario_id'] =  $re_exec_usuario['usuario_id'];
+    $_SESSION['usuario_nome'] = $re_exec_usuario['usuario_nome'];
+    $_SESSION['usuario_email'] = $re_exec_usuario['usuario_email'];
     header('Location: home.php');
 }else{
     $_SESSION['erro'] = 'Credenciais invalidas';
