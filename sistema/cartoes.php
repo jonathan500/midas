@@ -7,23 +7,6 @@ $logado = $midasSistema->logado();
 
 if ($logado) {
 
-    // consulta de categorias
-    $consultar_categorias = $midasSistema->consultar('*', 'midas_categorias', 'categoria_situacao LIKE \'A\'');
-    $exec_consultar_categorias = $midasSistema->executar($consultar_categorias);
-    $opcoes_categorias = '';
-    while ($re_exec_consultar_categorias = mysqli_fetch_assoc($exec_consultar_categorias)) {
-        $opcoes_categorias .= '<option value="' . $re_exec_consultar_categorias['categoria_id'] . '">' . $re_exec_consultar_categorias['categoria_descricao'] . '</option>';
-    }
-
-    //consulta de cartoes do usuario
-    $consulta_cartoes = $midasSistema->consultar('*', 'midas_cartoes', 'cartao_usuario_id = \'' . $_SESSION['usuario_id'] . '\'');
-    $exec_consulta_cartoes = $midasSistema->executar($consulta_cartoes);
-    $opcoes_cartoes = '';
-
-    while ($re_exec_consulta_cartoes = mysqli_fetch_assoc($exec_consulta_cartoes)) {
-        $opcoes_cartoes .= '<option value="' . $re_exec_consulta_cartoes['cartao_id'] . '">' . $re_exec_consulta_cartoes['cartao_descricao'] . '</option>';
-    }
-
 ?>
     <!DOCTYPE html>
 
@@ -127,78 +110,10 @@ if ($logado) {
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 style="text-align:center;" class="text">Movimentações</h3>
+                                <h3 style="text-align:center;" class="text">Cartões</h3>
                             </div>
                         </div>
-                        <div class="form-gruop">
-                            <div class="row">
-
-                                <div class="col-md-12">
-                                    <label for="Descrição" class="form-label control">Descrição:</label>
-                                    <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Descrição da compra..." />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="Data" class="form-label">Data:</label>
-                                    <input type="date" name="data" id="data" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="Valor" class="form-label control">Valor da movimentação</label>
-                                    <input type="text" name="valor" id="valor" class="form-control" onkeyup="formatarMoeda();" placeholder="Valor da movimentação...">
-                                </div>
-                                <div class="col-md-1" style="padding-top: 32px">
-                                    <button class="btn btn-danger btn-new-primary" onclick="negativo()">
-                                        <i class='bx bxs-upvote bx-rotate-180 icon'></i>
-
-                                    </button>
-                                </div>
-                                <div class="col-md-1" style="padding-top: 32px">
-                                    <button class="btn btn-success btn-new-primary" onclick="positivo();">
-                                        <i class='bx bxs-upvote icon'></i>
-                                    </button>
-                                </div>
-                                <input type="text" name="sinal" id="sinal" val="" hidden>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="cartao" class="form-label control">Cartão</label>
-                                    <select name="cartao" id="cartao" class="form-select control">
-                                        <option value="---">Selecione um cartão</option>
-                                        <?php
-                                        print($opcoes_cartoes);
-
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="categoria" class="form-label">Categoria</label>
-                                    <select name="categoria" id="categoria" class="form-select control">
-                                        <option value="----">Selecione uma categoria</option>
-                                        <?php
-                                        print($opcoes_categorias);
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-7">
-                                </div>
-                                <div class="col-md-2">
-                                    <br>
-                                    <button class="btn btn-secondary btn-new-primary" onclick="limpar();">
-                                        Cancelar
-                                    </button>
-                                </div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    <br>
-                                    <button class="btn btn-primary btn-new-primary" onclick="cadastrar();">
-                                        Cadastrar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="col-md-1">
 
@@ -207,33 +122,11 @@ if ($logado) {
             </div>
             <br>
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 style="text-align:center;" class="text">Listagem de movimentações</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table">
-                                <thead>
-                                    <tr style="text-align:center;">
-                                        <th>Código da movimentação</th>
-                                        <th>Descricao da movimentação</th>
-                                        <th>Valor da movimentação R$</th>
-                                        <th>Data da movimentação</th>
-                                        <th>Movimentação Categoria</th>
-                                        <th>Cartão utilizado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id='movimentacoes'></tbody>
-
-                            </table>
+                            dsafdsfdsa
                         </div>
                     </div>
                 </div>
@@ -241,18 +134,7 @@ if ($logado) {
         </section>
         <script src="../global.js"></script>
         <script>
-            $(document).ready(function() {
-                consultar();
-            });
-
-            function positivo() {
-                $('#sinal').val('positivo');
-            }
-
-            function negativo() {
-                $('#sinal').val('negativo');
-            }
-
+           
             function cadastrar() {
                 $.ajax({
                         url: "requisicoes_movimentacao.php",
@@ -307,35 +189,9 @@ if ($logado) {
                 $('#cartao').val('');
                 $('#categoria').val('');
             }
+            
+            function consultar(){
 
-            function consultar() {
-                $.ajax({
-                    url: "requisicoes_movimentacao.php",
-                    type: 'post',
-                    data: {
-                        acao: 'listar'
-                    },
-                    dataType: "json"
-                }).done(function(json) {
-                    $('#movimentacoes tr').remove();
-                    $('#movimentacoes').append(json.dados);
-                });
-            }
-
-            function formatarMoeda() {
-                var elemento = document.getElementById('valor');
-                var valor = elemento.value;
-
-                valor = valor + '';
-                valor = parseInt(valor.replace(/[\D]+/g, ''));
-                valor = valor + '';
-                valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-                if (valor.length > 6) {
-                    valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, "$1,$2");
-                }
-
-                elemento.value = valor;
             }
         </script>
 
