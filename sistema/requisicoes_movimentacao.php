@@ -77,7 +77,7 @@ switch ($_POST['acao']) {
             $retorno['dados'] = $linhas;
             $retorno['erro'] = 'N';
         } else {
-            $retorno['dados'] = 'a';
+            $retorno['dados'] = '';
             $retorno['erro'] = 'S';
             $retorno['mensagem'] = 'Erro ao consultar movimentações, favor tente novamente mais tarde';
         }

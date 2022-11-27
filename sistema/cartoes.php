@@ -7,6 +7,15 @@ $logado = $midasSistema->logado();
 
 if ($logado) {
 
+
+    $bandeiras_cartoes = $midasSistema->consultar('*', 'midas_bandeiras');
+    $exec_bandeiras_cartoes = $midasSistema->executar($bandeiras_cartoes);
+    $opcoes_bandeiras = '';
+
+    while ($re_exec_bandeiras_cartoes = mysqli_fetch_assoc($exec_bandeiras_cartoes)) {
+        $opcoes_bandeiras .= '<option value="' . $re_exec_bandeiras_cartoes['bandeira_id'] . '">' . $re_exec_bandeiras_cartoes['bandeira_descricao'] . '</option>';
+    }
+
 ?>
     <!DOCTYPE html>
 
@@ -22,7 +31,7 @@ if ($logado) {
         <link rel="shortcut icon" href="../logo.svg" type="image/x-icon" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Midas - Movimentações</title>
+        <title>Midas - Cartões</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="../global.css">
@@ -53,19 +62,19 @@ if ($logado) {
                             </a>
                         </li>
                         <li class="nav-list">
-                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/dashboard">
+                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/dashboard.php">
                                 <i class='bx bxs-pie-chart-alt-2 icon'></i>
                                 <span class="text nav-text">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-list">
-                            <a href="#">
+                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/movimentacao.php">
                                 <i class='bx bxs-wallet icon'></i>
                                 <span class="text nav-text">Movimentações</span>
                             </a>
                         </li>
                         <li class="nav-list">
-                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/cartoes.php">
+                            <a href="#">
                                 <i class='bx bx-credit-card-alt icon'></i>
                                 <span class="text nav-text">Cartões</span>
                             </a>
@@ -105,7 +114,6 @@ if ($logado) {
             <div class="conteiner-fluid">
                 <div class="row ">
                     <div class="col-md-1">
-
                     </div>
                     <div class="col-md-10">
                         <div class="row">
@@ -113,40 +121,91 @@ if ($logado) {
                                 <h3 style="text-align:center;" class="text">Cartões</h3>
                             </div>
                         </div>
-                        
-                    </div>
-                    <div class="col-md-1">
+                        <div class="form-gruop">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <label for="Descrição" class="form-label control">Nome cartão:</label>
+                                    <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Aqui vocë pode colocar um identificador para o seu cartão..." />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="Data" class="form-label">Data de validade:</label>
+                                    <input type="date" name="data" id="data" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="bandeira" class="form-label control">Bandeira:</label>
+                                    <select name="bandeira" id="bandeira" class="form-select control">
+                                        <option value="---">Selecione um cartão</option>
+                                        <?php
+                                        print($opcoes_bandeiras);
 
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            dsafdsfdsa
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+
+                                </div>
+                                <div class="col-md-2">
+                                    <br>
+                                    <button class="btn btn-primary btn-new-primary" onclick="cadastrar();">
+                                        Cadastrar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 style="text-align:center;" class="text">Listagem de cartões</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="text-align:center;">
+                                            <th>Apelido</th>
+                                            <th>Bandeira</th>
+                                            <th>Data de validade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='cartoes'></tbody>
+
+                                </table>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                    </div>
                 </div>
             </div>
+
         </section>
         <script src="../global.js"></script>
         <script>
-           
+            $(document).ready(function() {
+                consultar();
+            });
+
             function cadastrar() {
                 $.ajax({
-                        url: "requisicoes_movimentacao.php",
+                        url: "requisicoes_cartoes.php",
                         type: 'post',
                         data: {
-                            acao: 'inserir',
+                            acao: 'cadastrar',
                             descricao: $('#descricao').val(),
-                            valor: $('#valor').val(),
-                            date: $('#data').val(),
-                            cartao: $('#cartao').val(),
-                            sinal: $('#sinal').val(),
-                            categoria: $('#categoria').val()
+                            data_validade: $('#data').val(),
+                            bandeira: $('#bandeira').val()
                         },
                         dataType: "json"
                     }).done(function(json) {
@@ -166,6 +225,7 @@ if ($logado) {
                                 confirmButtonText: 'Ok',
                                 confirmButtonColor: 'red'
                             }).then((result) => {
+                                limpar();
                                 consultar();
                             })
                         }
@@ -182,16 +242,24 @@ if ($logado) {
             }
 
             function limpar() {
-                $('#sinal').val('');
                 $('#descricao').val('');
                 $('#data').val('');
-                $('#valor').val('');
-                $('#cartao').val('');
-                $('#categoria').val('');
+                $('#bandeira').val('');
             }
-            
-            function consultar(){
 
+            function consultar() {
+                $.ajax({
+                    url: "requisicoes_cartoes.php",
+                    type: 'post',
+                    data: {
+                        acao: 'listar'
+                    },
+                    dataType: "json"
+                }).done(function(json) {
+                    $('#cartoes tr').remove();
+                    $('#cartoes').append(json.dados);
+
+                })
             }
         </script>
 

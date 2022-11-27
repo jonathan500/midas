@@ -70,7 +70,7 @@ if ($logado) {
                             </a>
                         </li>
                         <li class="nav-list">
-                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/dashboard">
+                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/dashboards.php">
                                 <i class='bx bxs-pie-chart-alt-2 icon'></i>
                                 <span class="text nav-text">Dashboard</span>
                             </a>
@@ -204,8 +204,7 @@ if ($logado) {
 
                     </div>
                 </div>
-            </div>
-            <br>
+                <br>
             <br>
             <br>
             <br>
@@ -238,6 +237,8 @@ if ($logado) {
                     </div>
                 </div>
             </div>
+            </div><!--  div fluid-->
+            
         </section>
         <script src="../global.js"></script>
         <script>
