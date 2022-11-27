@@ -87,6 +87,11 @@ class MyMidas{
         }
     }
 
+    function formatarvalor($valor){
+        return str_replace(',','.',$valor);
+
+    }
+
 }
     
 ?>

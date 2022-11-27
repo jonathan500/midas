@@ -254,49 +254,53 @@ if ($logado) {
             }
 
             function cadastrar() {
-                $.ajax({
-                        url: "requisicoes_movimentacao.php",
-                        type: 'post',
-                        data: {
-                            acao: 'inserir',
-                            descricao: $('#descricao').val(),
-                            valor: $('#valor').val(),
-                            date: $('#data').val(),
-                            cartao: $('#cartao').val(),
-                            sinal: $('#sinal').val(),
-                            categoria: $('#categoria').val()
-                        },
-                        dataType: "json"
-                    }).done(function(json) {
-                        if (json.erro == 'S') {
+                if (
+                    $('#sinal').val() != '' & $('#descricao').val() != '' & $('#data').val() != '' & $('#valor').val() != '' & $('#cartao').val() != '' & $('#categoria').val() != ''
+                ) {
+                    $.ajax({
+                            url: "requisicoes_movimentacao.php",
+                            type: 'post',
+                            data: {
+                                acao: 'inserir',
+                                descricao: $('#descricao').val(),
+                                valor: $('#valor').val(),
+                                date: $('#data').val(),
+                                cartao: $('#cartao').val(),
+                                sinal: $('#sinal').val(),
+                                categoria: $('#categoria').val()
+                            },
+                            dataType: "json"
+                        }).done(function(json) {
+                            if (json.erro == 'S') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: json.mensagem,
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: 'red'
+                                })
+                            } else {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Sucesso',
+                                    text: json.mensagem,
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: 'red'
+                                }).then((result) => {
+                                    consultar();
+                                })
+                            }
+                        })
+                        .fail(function(jqXHR, textStatus, msg) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
-                                text: json.mensagem,
+                                text: 'Ocoreeu um erro ao tentar registrar os dados, favor tente novamente mais tarde',
                                 confirmButtonText: 'Ok',
                                 confirmButtonColor: 'red'
                             })
-                        } else {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sucesso',
-                                text: json.mensagem,
-                                confirmButtonText: 'Ok',
-                                confirmButtonColor: 'red'
-                            }).then((result) => {
-                                consultar();
-                            })
-                        }
-                    })
-                    .fail(function(jqXHR, textStatus, msg) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Ocoreeu um erro ao tentar registrar os dados, favor tente novamente mais tarde',
-                            confirmButtonText: 'Ok',
-                            confirmButtonColor: 'red'
-                        })
-                    });
+                        });
+                }
             }
 
             function limpar() {

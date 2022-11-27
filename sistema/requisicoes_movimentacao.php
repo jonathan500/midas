@@ -5,9 +5,14 @@ $midasSistema = new MyMidas;
 
 switch ($_POST['acao']) {
     case 'inserir':
-        $valor = str_replace(',','.',$_POST['valor']);
-        print($valor);
-        exit;
+        $valor = $midasSistema->formatarvalor($_POST['valor']);
+
+        if($_POST['sinal'] == 'positivo' || $_POST['sinal'] == null){
+            $valor = $valor;
+        }else{
+            $valor = '-'.$valor;
+        }
+
         $inserir_movimentacao = $midasSistema->inserir(
             'midas_movimentacoes',
             '
@@ -22,7 +27,7 @@ switch ($_POST['acao']) {
                 $_POST['cartao'] . ', \'' .
                 $_POST['descricao'] . '\',\'' .
                 $_POST['date'] . '\',' .
-                $_POST['valor']
+                $valor
         );
 
         $exec_inserir_movimentacao = $midasSistema->executar($inserir_movimentacao);
@@ -37,6 +42,7 @@ switch ($_POST['acao']) {
             $retorno['mensagem'] = 'Erro ao inserir os dados, verifique se todos os campos foram preenchidos';
         }
         break;
+
     case 'listar':
         $consultar_dados = $midasSistema->consultar(
             'a.*, b.categoria_descricao as movimentacao_categoria, c.cartao_descricao as movimentacao_cartao',
