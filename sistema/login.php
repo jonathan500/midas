@@ -65,7 +65,7 @@ session_start();
                     <div class="row prabaixo">
 
                         <div class="col-md-5">
-                            <button style="width: 100% !important;" class="btn btn-secondary btn-new-primar ">Cadastrar-se</button>
+                            <button style="width: 100% !important;" class="btn btn-secondary btn-new-primar " type="button" onclick="location.href='cadastro.php'">Cadastrar-se</button>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-5">
