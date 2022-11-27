@@ -41,7 +41,6 @@ body.dark{
     --text-color:#ccc;
     --text-button-color: #000;
 }
-
 /* ======= sidebar === */
 .sidebar{
     position: fixed;
@@ -327,6 +326,49 @@ body.dark .switch::before{
     width: 100%;
 }
 
-/* .card{
-    background:var(--sidebar-color);
-} */
+body.login{
+    padding: 4vh;
+    margin: 0;
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+    linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+}
+.container-login{
+    min-height: calc(100vh - 8vh);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border-radius: 10vh;
+    overflow: hidden;
+}
+.login-left{
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+.login-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: content;
+    padding-right: 150px;
+    background-color: #fff;  
+}
+.imagem-login{
+    width: 80%;
+}
+
+.prabaixo{
+    position: relative;
+    padding-top: 10vh;
+}
+
+.login-header{
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+.login-header p{
+    opacity: 0.7;
+}
+
+.login-header h1{
+    color: black;
+}
