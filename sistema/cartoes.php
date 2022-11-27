@@ -61,12 +61,12 @@ if ($logado) {
                                 <span class="text nav-text">Home</span>
                             </a>
                         </li>
-                        <li class="nav-list">
-                            <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/dashboard.php">
+                        <!-- <li class="nav-list">
+                            <a href="<?php // print($midasSistema->retornaInicio()); ?>midas/sistema/dashboard.php">
                                 <i class='bx bxs-pie-chart-alt-2 icon'></i>
                                 <span class="text nav-text">Dashboard</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-list">
                             <a href="<?php print($midasSistema->retornaInicio()); ?>midas/sistema/movimentacao.php">
                                 <i class='bx bxs-wallet icon'></i>

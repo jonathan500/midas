@@ -372,3 +372,11 @@ body.login{
 .login-header h1{
     color: black;
 }
+
+.centralizador{
+    align-items: center;
+    justify-content: center;    
+}
+p{
+    color:var(--text-color);
+}

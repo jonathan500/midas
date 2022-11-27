@@ -18,7 +18,7 @@ switch ($_POST['acao']) {
                 $linhas .= $re_exe_consulta_cartoes['cartao_bandeira'];
                 $linhas .= '</td>';
                 $linhas .= '<td style="text-align: center">';
-                $linhas .= $re_exe_consulta_cartoes['cartao_data_validade'];
+                $linhas .= $midasSistema->converteDataTela($re_exe_consulta_cartoes['cartao_data_validade']);
                 $linhas .= '</td>';
                 $linhas .= '</tr>';
             }

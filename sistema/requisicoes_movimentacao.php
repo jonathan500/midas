@@ -64,7 +64,7 @@ switch ($_POST['acao']) {
                 $linhas .= $resultado['movimentacao_valor'];
                 $linhas .= '</td>';
                 $linhas .= '<td style="text-align: center">';
-                $linhas .= $resultado['movimentacao_data'];
+                $linhas .= $midasSistema->converteDataTela($resultado['movimentacao_data']);
                 $linhas .= '</td>';
                 $linhas .= '<td style="text-align: center">';
                 $linhas .= $resultado['movimentacao_categoria'];
